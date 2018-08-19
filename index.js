@@ -78,7 +78,7 @@ Client.on("ready", async =>{
 });
 Client.on('guildMemberAdd', member => {
     let canalBienvenida = member.guild.channels.find(`name`, "entrada-salida");
-    let sinhogarRol = member.guild.roles.find(`name`, "sinhogar");
+    let sinhogarRol = member.guild.roles.find(`name`, "Sinhogar");
     member.addRole(sinhogarRol.id);
     canalBienvenida.send(`¡Hola ${member}, bienvenido a la Casa de la Brillantez!\nPreséntate en la #salacomún y pide tu rol de la casa mencionando al @Ministerio de la Brillantez.\nhttps://gph.is/2nO4OuI`);
 });
