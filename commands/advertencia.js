@@ -5,6 +5,7 @@ let advertencias = JSON.parse(fs.readFileSync("./storage/advertencias.json", "ut
 
 module.exports.run = async (bot, message, args) =>
 {
+    message.delete();
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("¡No puedes hacer eso!");
     let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
     if(!wUser) return message.reply("Especifíca un usuario");

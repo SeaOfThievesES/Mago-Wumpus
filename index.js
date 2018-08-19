@@ -63,11 +63,11 @@ Client.on("message", async message => {
    
 });
 
-let statuses = ['ser mago', 'lanzar magia'];
+let statuses = ['ser mago', 'lanzar magia', 'hacer magia'];
 
 Client.on("ready", async =>{
     console.log(`¡${Client.user.username} está online!`);
-    Client.user.setActivity(`MAGO WUMPUS`, {type: "PLAYING"});
+    //Client.user.setActivity(`MAGO WUMPUS`, {type: "PLAYING"});
     setInterval(function(){
     let status = statuses[Math.floor(Math.random()*statuses.length)];
     Client.user.setActivity(`${status}`, {type: "PLAYING"});
@@ -79,12 +79,28 @@ Client.on("ready", async =>{
 Client.on('guildMemberAdd', member => {
     let canalBienvenida = member.guild.channels.find(`name`, "entrada-salida");
     let sinhogarRol = member.guild.roles.find(`name`, "Sinhogar");
+    
+    //canalBienvenida.send(`¡Hola ${member}, bienvenido a la Casa de la Brillantez!\nPreséntate en la #salacomún y pide tu rol de la casa mencionando al @Ministerio de la Brillantez.\nhttps://gph.is/2nO4OuI`);
+    
+    let bienvenidoEmbed = new Discord.RichEmbed()
+    .setTitle("¡BIENVENID@!")
+    .setDescription(`¡${member} has entrado a la ${member.guild.name}!\n\nPreséntate en la #salacomún y pide tu rol al Ministerio.`)
+    .setImage("https://cdn.discordapp.com/attachments/480419711302107136/480788908821577758/2018-08-19_19-22-55.gif")
+    .setTimestamp()
+    .setColor("#7289da");
+    canalBienvenida.send(bienvenidoEmbed);
     member.addRole(sinhogarRol.id);
-    canalBienvenida.send(`¡Hola ${member}, bienvenido a la Casa de la Brillantez!\nPreséntate en la #salacomún y pide tu rol de la casa mencionando al @Ministerio de la Brillantez.\nhttps://gph.is/2nO4OuI`);
 });
 Client.on('guildMemberRemove', member => {
     let canalDespedida = member.guild.channels.find(`name`, "entrada-salida");
-    canalDespedida.send(`Adiós ${member}, ha salido de Casa de la Brillantez!\nHas perdido todos tus roles, algunos no podrás recuperarlos de nuevo.\nhttps://gph.is/2Pm3Ulz`);
+    
+    let canalDespedidaEmbed = new Discord.RichEmbed()
+    .setTitle("¡HASTA OTRA!")
+    .setDescription(`¡${member.displayName} ha salido de la ${member.guild.name}!\n\nAl traspasar la barrera mágica sus roles han desaparecido.`)
+    .setImage("https://cdn.discordapp.com/attachments/480419711302107136/480788908821577758/2018-08-19_19-22-55.gif")
+    .setTimestamp()
+    .setColor("#7289da");
+    canalDespedida.send(canalDespedidaEmbed);
 });
 
 
