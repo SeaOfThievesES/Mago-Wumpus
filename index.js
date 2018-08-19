@@ -77,8 +77,14 @@ Client.on("ready", async =>{
     
 });
 Client.on('guildMemberAdd', member => {
-    //let canalBienvenida = message.guild.channels.find(`name`, "general");
-    //canalBienvenida.send(`¡${member} bienvenido!`);
+    let canalBienvenida = member.guild.channels.find(`name`, "entrada-salida");
+    let sinhogarRol = member.guild.roles.find(`name`, "sinhogar");
+    member.addRole(sinhogarRol.id);
+    canalBienvenida.send(`¡Hola ${member}, bienvenido a la Casa de la Brillantez!\nPreséntate en la #salacomún y pide tu rol de la casa mencionando al @Ministerio de la Brillantez.\nhttps://gph.is/2nO4OuI`);
+});
+Client.on('guildMemberRemove', member => {
+    let canalDespedida = member.guild.channels.find(`name`, "entrada-salida");
+    canalDespedida.send(`Adiós ${member}, ha salido de Casa de la Brillantez!\nHas perdido todos tus roles, algunos no podrás recuperarlos de nuevo.\nhttps://gph.is/2Pm3Ulz`);
 });
 
 
