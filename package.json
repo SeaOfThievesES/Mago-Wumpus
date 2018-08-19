@@ -1,0 +1,14 @@
+{
+  "name": "bot-hypesquads",
+  "version": "1.0.0",
+  "description": "Un bot para las comunidades hispanohablantes de las casas de HypeSquad",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
