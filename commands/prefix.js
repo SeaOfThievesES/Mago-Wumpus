@@ -3,6 +3,7 @@ const fs = require("fs");
 
 module.exports.run = async (bot, message, args, prefix) =>
 {
+    message.delete();
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("¡No puedes hacer eso!");
     if(!args[0]) return message.reply(`¡Pon el prefijo que quieras que tenga en este servidor! Uso: ${prefix}prefix <el prefijo que desees>`);
 
