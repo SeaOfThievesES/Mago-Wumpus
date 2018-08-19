@@ -38,7 +38,7 @@ module.exports.run = async (bot, message, args) =>
         let rolMuteado = message.guild.roles.find(`name`, "Muteado");
         if(!rolMuteado) return message.reply("¡No he podido encontrar el rol de muteado!");
 
-        let tiempoDeMute = "10s";
+        let tiempoDeMute = "600s";
         await(wUser.addRole(rolMuteado.id));        
         message.channel.send(`${wUser} ha sido muteado por 10 minutos por tener 2 advertencias.`);
         
@@ -51,6 +51,39 @@ module.exports.run = async (bot, message, args) =>
     {
         message.guild.member(wUser).kick(razon);
         message.channel.send(`${wUser} ha sido expulsado por tener 3 advertencias.`)
+    }
+    if(advertencias[wUser.id].advertencias == 4)
+    {
+        let rolMuteado = message.guild.roles.find(`name`, "Muteado");
+        if(!rolMuteado) return message.reply("¡No he podido encontrar el rol de muteado!");
+
+        let tiempoDeMute = "900s";
+        await(wUser.addRole(rolMuteado.id));        
+        message.channel.send(`${wUser} ha sido muteado por 15 minutos por tener 4 advertencias.`);
+        
+        setTimeout(function(){
+            wUser.removeRole(rolMuteado.id)
+            message.channel.send(`${wUser} ha sido desmuteado.`)
+        }, ms(tiempoDeMute));
+    }
+    if(advertencias[wUser.id].advertencias == 5)
+    {
+        let rolMuteado = message.guild.roles.find(`name`, "Muteado");
+        if(!rolMuteado) return message.reply("¡No he podido encontrar el rol de muteado!");
+
+        let tiempoDeMute = "1800s";
+        await(wUser.addRole(rolMuteado.id));        
+        message.channel.send(`${wUser} ha sido muteado por 30 minutos por tener 4 advertencias.`);
+        
+        setTimeout(function(){
+            wUser.removeRole(rolMuteado.id)
+            message.channel.send(`${wUser} ha sido desmuteado.`)
+        }, ms(tiempoDeMute));
+    }
+    if(advertencias[wUser.id].advertencias == 6)
+    {
+        message.guild.member(wUser).ban(razon);
+        message.channel.send(`${wUser} ha sido baneado por tener 6 advertencias.`)
     }
 }
 
