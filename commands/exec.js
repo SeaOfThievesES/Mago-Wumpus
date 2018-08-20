@@ -10,8 +10,12 @@ module.exports.run = async (bot, message, args) =>
     if (message.author.id !== config.ownerID) return;
 	const code = args[0];
 	let executed = exec(code, function (error, stdout, stderr) {
-        message.channel.send('```js\nstdout: ' + stdout + '```');
-        message.channel.send('```js\nstderr: ' + stderr + '```');
+        message.channel.send("STDOUT:");
+        message.channel.send('```js\n' + stdout + '```');
+        message.channel.send("STDERR:");
+        if(stderr) {
+            message.channel.send('```js\n' + stderr + '```');
+        }
         if (error !== null) {
             message.channel.send('exec error: ' + error);
         }
