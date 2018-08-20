@@ -82,7 +82,7 @@ Client.on('guildMemberRemove', member => {
     let canalDespedida = member.guild.channels.find(`name`, "entrada-salida");
     
     let canalDespedidaEmbed = new Discord.RichEmbed()
-    .setTitle("**¡Hasta Otra!**")
+    .setTitle("**¡Hasta otra!**")
     .setDescription(`¡${member.displayName} ha salido de la **${member.guild.name}**!\n\nAl traspasar la barrera mágica sus roles han desaparecido.`)
     .setImage("https://cdn.discordapp.com/attachments/480419711302107136/480788908821577758/2018-08-19_19-22-55.gif")
     .setTimestamp()
