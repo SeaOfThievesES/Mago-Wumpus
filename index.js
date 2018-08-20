@@ -5,7 +5,7 @@ const Client = new Discord.Client();
 const fs = require("fs");
 Client.commands = new Discord.Collection();
 
-this.reloadCmds();
+reloadCmds();
 module.exports.reloadCmds = () => {
     fs.readdir("./commands/", (err, files) =>{
         if(err) console.log(err);
