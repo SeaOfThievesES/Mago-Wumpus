@@ -7,9 +7,8 @@ const magoWumpus = require("../index");
 module.exports.run = async (bot, message, args) =>
 {
     if (message.member.hasPermission("ADMINISTRATOR")) return message.reply("¡No puedes hacer eso!");
-    magoWumpus.reloadCmds();
-    console.log("REINICIO");
     message.channel.send('Reiniciando comandos...')
+    magoWumpus.reloadCmds()
         .then(msg => Client.destroy())
         .then(() => Client.login(token.token));
 }
