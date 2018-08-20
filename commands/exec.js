@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) =>
     var exec = require('child_process').exec;
     //message.delete();
     if (message.author.id !== config.ownerID) return;
-	const code = args.join("");
+	const code = args.join(" ");
 	let executed = exec(code, function (error, stdout, stderr) {
         message.channel.send("STDOUT:");
         message.channel.send('```js\n' + stdout + '```');
