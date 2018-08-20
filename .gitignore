@@ -2,3 +2,5 @@
 config/token.json
 start.bat
 
+config/botconfig.json
+config/prefixes.json
