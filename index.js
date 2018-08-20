@@ -5,8 +5,8 @@ const Client = new Discord.Client();
 const fs = require("fs");
 Client.commands = new Discord.Collection();
 
-reloadCmds();
-function reloadCmds(){
+this.reloadCmds();
+module.exports.reloadCmds = function(){
     fs.readdir("./commands/", (err, files) =>{
         if(err) console.log(err);
     
@@ -17,12 +17,12 @@ function reloadCmds(){
         }
     
         jsfile.forEach((f, i) =>
-    {
-        delete require.cache[require.resolve(`./commands/${f}`)];
-        let props = require(`./commands/${f}`);
-        console.log(`Comando ${f} cargado!`);
-        Client.commands.set(props.help.name, props);
-    })
+        {
+            delete require.cache[require.resolve(`./commands/${f}`)];
+            let props = require(`./commands/${f}`);
+            console.log(`Comando ${f} cargado!`);
+            Client.commands.set(props.help.name, props);
+        })
 
 });
 }
@@ -45,20 +45,6 @@ Client.on("message", async message => {
     let commandfile = Client.commands.get(cmd.slice(prefix.length));
     if(message.content.startsWith(prefix)){
     if(commandfile) commandfile.run(Client,message,args,prefix);
-    }
-    
-    //RESETEO DEL BOT
-    
-    if(message.content === `${botconfig.prefix}reiniciar`){
-        if (message.member.hasPermission("ADMINISTRATOR")) return message.reply("¡No puedes hacer eso!");
-        resetClient(message.channel);     
-    }
-    function resetClient(channel) {
-        reloadCmds();
-        console.log("REINICIO");
-        channel.send('Reiniciando comandos...')
-        .then(msg => Client.destroy())
-        .then(() => Client.login(token.token));
     }
    
 });
