@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) =>
     //message.delete();
     if (message.author.id !== config.ownerID) return;
     try {
-	const code = args[0];
+	const code = args.join(" ");
 	let evaled = eval(code);
 
 	if (typeof evaled !== "string")
