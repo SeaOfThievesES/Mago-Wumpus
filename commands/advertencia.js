@@ -37,7 +37,7 @@ module.exports = class extends Command {
         .addField("Cantidad de advertencias", advertencias[wUser.id].advertencias)
         .addField("Razón", razon);
 
-        let canalAdv = message.guild.channels.find(`name`, "general");
+        let canalAdv = message.guild.channels.find(`name`, "registro");
         if(!canalAdv) message.reply("¡No hay canal de advertencias!")
         canalAdv.send(advertenciaEmbed);
 
