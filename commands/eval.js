@@ -4,12 +4,22 @@ const ms = require("ms");
 const config = require("../config/botconfig.json");
 const { Command } = require("../index");
 
+<<<<<<< HEAD
 module.exports = class extends Command {
     constructor(...args) {
         super(...args, {
             name: 'eval'
         });
     }
+=======
+module.exports.run = async (bot, message, args) =>
+{
+    //message.delete();
+    if (message.author.id !== config.ownerID) return;
+    try {
+	const code = args.join(" ");
+	let evaled = eval(code);
+>>>>>>> 3b65753488ee4facdc04982771c953a7b8edb493
 
     async run(message, args) {
         //message.delete();
