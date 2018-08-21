@@ -47,7 +47,7 @@ Client.on("message", async message => {
     let args = messageArray.slice(1);
     let commandfile = Client.commands.get(cmd.slice(prefix.length));
     if(message.content.startsWith(prefix)){
-    if(commandfile) commandfile.run(message,args);
+    if(commandfile) await commandfile.run(message,args);
     }
    
 });
@@ -91,7 +91,6 @@ Client.on('guildMemberRemove', member => {
     .setColor("#7289da");
     canalDespedida.send(canalDespedidaEmbed);
 });
-
 
 Client.login(token.token);
 

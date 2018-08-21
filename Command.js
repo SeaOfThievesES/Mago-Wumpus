@@ -1,6 +1,6 @@
 class Command {
-    constructor(bot, file, prefix) {
-        this.name = this.name.toLowerCase();
+    constructor(bot, file, prefix, options) {
+        this.name = options.name;
         this.bot = bot;
         this.prefix = prefix;
     }
