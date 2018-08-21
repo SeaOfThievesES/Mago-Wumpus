@@ -10,6 +10,6 @@ module.exports = class extends Command {
     async run(message, args) {
         message.delete();
         const m = await message.channel.send("Ping?");
-        m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+        m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(this.bot.ping)}ms`);
     }
 }
