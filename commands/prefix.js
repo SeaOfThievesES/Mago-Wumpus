@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { Command } = require("../index");
+const config = require("../config/botconfig.json");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -10,7 +11,9 @@ module.exports = class extends Command {
 
     async run(message, args) {
         message.delete();
+        if (message.author.id !== config.ownerID){
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("¡No puedes hacer eso!");
+        }
         if(!args[0]) return message.reply(`¡Pon el prefijo que quieras que tenga en este servidor! Uso: ${this.prefix}prefix <el prefijo que desees>`);
 
         let prefixes = JSON.parse(fs.readFileSync("./config/prefixes.json", "utf8"));

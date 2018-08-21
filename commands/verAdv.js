@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { Command } = require("../index");
+const config = require("../config/botconfig.json");
 
 module.exports = class extends Command {
     constructor(...args) {
