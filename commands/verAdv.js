@@ -1,18 +1,21 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const ms = require("ms");
+const { Command } = require("../index");
 
-module.exports.run = async (bot, message, args) =>
-{
-    message.delete();
-    let advertencias = JSON.parse(fs.readFileSync("./storage/advertencias.json", "utf8"));
-    let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    let lvlAdv = advertencias[wUser.id].advertencias;
+module.exports = class extends Command {
+    constructor(...args) {
+        super(...args, {
+            name: 'ver'
+        });
+    }
 
-    message.reply(`${wUser} tiene ${lvlAdv} advertencias.`);
-    
+    async run(message, args) {
+        message.delete();
+        let advertencias = JSON.parse(fs.readFileSync("./storage/advertencias.json", "utf8"));
+        let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+        let lvlAdv = advertencias[wUser.id].advertencias;
 
-}
-module.exports.help = {
-    name: "ver"
+        message.reply(`${wUser} tiene ${lvlAdv} advertencias.`);
+    }
 }

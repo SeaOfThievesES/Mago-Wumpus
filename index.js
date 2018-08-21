@@ -3,6 +3,7 @@ const token = require("./config/token.json");
 const Discord = require("discord.js");
 const Client = new Discord.Client();
 const fs = require("fs");
+const Command =  require('./Command');
 Client.commands = new Discord.Collection();
 
 reloadCmds();
@@ -20,9 +21,10 @@ function reloadCmds() {
         jsfile.forEach((f, i) =>
         {
             delete require.cache[require.resolve(`./commands/${f}`)];
-            let props = require(`./commands/${f}`);
+            let Props = require(`./commands/${f}`);
             console.log(`Comando ${f} cargado!`);
-            Client.commands.set(props.help.name, props);
+            let command = new Props(Client, f, '+');
+            Client.commands.set(command.name, command);
         })
 
 });
@@ -45,7 +47,7 @@ Client.on("message", async message => {
     let args = messageArray.slice(1);
     let commandfile = Client.commands.get(cmd.slice(prefix.length));
     if(message.content.startsWith(prefix)){
-    if(commandfile) commandfile.run(Client,message,args,prefix);
+    if(commandfile) commandfile.run(message,args);
     }
    
 });
@@ -56,7 +58,7 @@ Client.on("ready", async =>{
     console.log(`¡${Client.user.username} está online!`);
     //Client.user.setActivity(`MAGO WUMPUS`, {type: "PLAYING"});
     setInterval(function(){
-    let status = statuses[Math.floor(Math.random()*statuses.length)];
+    let status = statuses[Math.floor(Math.random()*(statuses.length - 1))];
     Client.user.setActivity(`${status}`, {type: "PLAYING"});
    // console.log(status);
     }, 5000)
@@ -92,3 +94,5 @@ Client.on('guildMemberRemove', member => {
 
 
 Client.login(token.token);
+
+module.exports.Command = Command;
