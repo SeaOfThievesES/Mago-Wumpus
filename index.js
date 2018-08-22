@@ -4,11 +4,14 @@ const Discord = require("discord.js");
 const Client = new Discord.Client();
 const fs = require("fs");
 const Command =  require('./Command');
+const Event =  require('./Event');
 Client.commands = new Discord.Collection();
 
 reloadCmds();
+reloadEvents();
 
 module.exports.reloadCmds = reloadCmds;
+module.exports.reloadEvents = reloadEvents;
 
 function reloadCmds() {
     fs.readdir("./commands/", (err, files) =>{
@@ -28,10 +31,32 @@ function reloadCmds() {
             let command = new Comando(Client, f, '+');
             Client.commands.set(command.name, command);
         })
-
-});
+    });
 }
 
+function reloadEvents() {
+    fs.readdir("./events/", (err, files) =>{
+        if (err) console.log(err);
+
+        let jsfile = files.filter(f => f.split(".").pop() === "js");
+        if (jsfile.length <= 0) {
+            console.log("No se han podido encontar eventos");
+            return;
+        }
+
+        jsfile.forEach((f, i) =>
+        {
+            delete require.cache[require.resolve(`./events/${f}`)];
+            let Evento = require(`./events/${f}`);
+            console.log(`Evento ${f} cargado!`);
+            let event = new Event(Client, f, '+');
+            Client.on(event.name, function(eventObject) {
+                event.run().bind(null);
+            });
+        })
+    });
+}
+/*
 Client.on("message", async message => {    
     if(message.author.bot) return;
 
@@ -91,6 +116,7 @@ Client.on('guildMemberRemove', member => {
     .setColor("#7289da");
     canalDespedida.send(canalDespedidaEmbed);
 });
+*/
 
 Client.login(token.token);
 
