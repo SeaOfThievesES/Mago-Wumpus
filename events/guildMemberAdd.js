@@ -18,7 +18,7 @@ module.exports = class extends Event {
         .setImage("https://cdn.discordapp.com/attachments/480419711302107136/480788908821577758/2018-08-19_19-22-55.gif")
         .setTimestamp()
         .setColor("#7289da");
-        canalBienvenida.send(`${member}`, {embed: bienvenidoEmbed});
+        canalBienvenida.send(bienvenidoEmbed);
         member.addRole(sinhogarRol.id);
     }
 }
