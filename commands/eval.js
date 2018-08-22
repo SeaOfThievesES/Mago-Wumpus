@@ -12,11 +12,12 @@ module.exports = class extends Command {
             const code = args.join(" ");
             let evaled = eval(code);
 
-            if (typeof evaled !== "string")
+            if (typeof evaled !== "string") {
                 let promise = await require("util").inspect(evaled);
                 promise.then(function(result) {
                     message.channel.send(clean(evaled), {code:"x1"});
                 });
+            }
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
         }
