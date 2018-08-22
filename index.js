@@ -46,13 +46,11 @@ function reloadEvents() {
 
         jsfile.forEach((f, i) =>
         {
-            delete require.cache[require.resolve(`./events/${f}`)];
             let Evento = require(`./events/${f}`);
             console.log(`Evento ${f} cargado!`);
             let event = new Evento(Client, f, '+');
-            Client.on(event.name, function(eventObject) {
-                event.run.bind(null);
-            });
+            Client.on(event.name, event.run.bind(null));
+            delete require.cache[require.resolve(`./events/${f}`)];
         })
     });
 }

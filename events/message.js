@@ -1,5 +1,5 @@
 const { Event } = require("../index");
-const config = require("../config/botconfig.json");
+const botconfig = require("./config/botconfig.json");
 const fs = require("fs");
 
 module.exports = class extends Event {
