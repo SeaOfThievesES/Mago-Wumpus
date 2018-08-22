@@ -1,5 +1,6 @@
 const magoWumpus = require("../index");
 const { Command } = require("../index");
+const token = require("../config/token.json");
 const config = require("../config/botconfig.json");
 
 module.exports = class extends Command {
