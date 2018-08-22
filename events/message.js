@@ -25,7 +25,7 @@ module.exports = class extends Event {
             let messageArray = message.content.split(" ");
             let cmd = messageArray[0];
             let args = messageArray.slice(1);
-            let commandfile = Client.commands.get(cmd.slice(prefix.length));
+            let commandfile = this.bot.commands.get(cmd.slice(prefix.length));
             if(commandfile) await commandfile.run(message,args);
         }
     }
