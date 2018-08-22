@@ -20,20 +20,14 @@ module.exports = class extends Command {
 
             if (mensaje.length > 2000) {
                 if (fs.exists('./output') == true) {
-                    fs.unlink('./output', function(err) {
-                        if (err) throw err;
-                    });
+                    fs.unlinkSync('./output');
                 }
-                fs.writeFile("./output", mensaje, function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
+                fs.writeFileSync("./output", mensaje);
 
-                    message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
-                        attachement: './output',
-                        name: 'output'
-                    }]});
-                });
+                message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
+                    attachement: './output',
+                    name: 'output'
+                }]});
             } else {
                 message.channel.send(mensaje, {code:"x1"});
             }
