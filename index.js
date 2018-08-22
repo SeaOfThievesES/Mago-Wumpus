@@ -121,3 +121,4 @@ Client.on('guildMemberRemove', member => {
 Client.login(token.token);
 
 module.exports.Command = Command;
+module.exports.Event = Event;
