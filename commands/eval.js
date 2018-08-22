@@ -28,7 +28,7 @@ module.exports = class extends Command {
 
                 message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
                     attachment: './output',
-                    name: 'output'
+                    name: 'output.txt'
                 }]});
             } else {
                 message.channel.send(mensaje, {code:"x1"});
