@@ -10,21 +10,12 @@ module.exports = class extends Command {
         if (message.author.id !== config.ownerID) return;
         try {
             const code = args.join(" ");
-            let evaled = eval(code);
+            let evaled = await eval(code);
 
-            if(evaled.then) {
-                evaled.then(function(result) {
-                    if (typeof evaled !== "string")
-                        evaled = require("util").inspect(evaled);
+            if (typeof evaled !== "string")
+                evaled = require("util").inspect(evaled);
 
-                    message.channel.send(clean(evaled), {code:"x1"});
-                })
-            } else {
-                if (typeof evaled !== "string")
-                    evaled = require("util").inspect(evaled);
-
-                message.channel.send(clean(evaled), {code:"x1"});
-            }
+            message.channel.send(clean(evaled), {code:"x1"});
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
         }
