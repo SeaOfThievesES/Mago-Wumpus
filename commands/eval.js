@@ -1,4 +1,5 @@
 const config = require("../config/botconfig.json");
+var fs = require('fs');
 const { Command } = require("../index");
 
 module.exports = class extends Command {
@@ -15,7 +16,26 @@ module.exports = class extends Command {
             if (typeof evaled !== "string")
                 evaled = require("util").inspect(evaled);
 
-            message.channel.send(clean(evaled), {code:"x1"});
+            const mensaje = clean(evaled);
+
+            if (mensaje.length > 2000) {
+                fs.writeFile("../output", mensaje, function(err) {
+                    if(err) {
+                        return console.log(err);
+                    }
+                });
+
+                message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
+                    attachment: '../output',
+                    name: 'output'
+                }]});
+
+                fs.unlink('../output', (err) => {
+                    if (err) throw err;
+                });
+            } else {
+                message.channel.send(mensaje, {code:"x1"});
+            }
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
         }
