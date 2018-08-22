@@ -27,7 +27,7 @@ module.exports = class extends Command {
                 fs.writeFileSync("./output", mensaje);
 
                 message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
-                    attachement: './output',
+                    attachment: './output',
                     name: 'output'
                 }]});
             } else {
