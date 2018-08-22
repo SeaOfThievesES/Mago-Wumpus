@@ -7,8 +7,8 @@ const Command =  require('./Command');
 const Event =  require('./Event');
 Client.commands = new Discord.Collection();
 
-await reloadCmds();
-await reloadEvents();
+reloadCmds();
+reloadEvents();
 
 module.exports.reloadCmds = reloadCmds;
 module.exports.reloadEvents = reloadEvents;
