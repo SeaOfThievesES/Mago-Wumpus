@@ -3,9 +3,7 @@ const { Command } = require("../index");
 
 module.exports = class extends Command {
     constructor(...args) {
-        super(...args, {
-		name: 'eval'
-        });
+        super(...args, { });
     }
 
     async run(message, args) {
@@ -15,9 +13,9 @@ module.exports = class extends Command {
             let evaled = eval(code);
 
             if (typeof evaled !== "string")
-                evaled = await require("util").inspect(evaled);
-
-            message.channel.send(clean(evaled), {code:"x1"});
+                await require("util").inspect(evaled).then(function(result) {
+                    message.channel.send(clean(evaled), {code:"x1"});
+                });
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
         }

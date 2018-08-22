@@ -4,9 +4,7 @@ const { Command } = require("../index");
 
 module.exports = class extends Command {
     constructor(...args) {
-        super(...args, {
-            name: 'exec'
-        });
+        super(...args, { });
     }
 
     async run(message, args) {

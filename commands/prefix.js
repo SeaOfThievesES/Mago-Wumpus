@@ -4,9 +4,7 @@ const config = require("../config/botconfig.json");
 
 module.exports = class extends Command {
     constructor(...args) {
-        super(...args, {
-            name: 'prefix'
-        });
+        super(...args, { });
     }
 
     async run(message, args) {

@@ -2,9 +2,7 @@ const { Command } = require("../index");
 
 module.exports = class extends Command {
     constructor(...args) {
-        super(...args, {
-            name: 'ping'
-        });
+        super(...args, { });
     }
 
     async run(message, args) {
