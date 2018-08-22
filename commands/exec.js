@@ -1,7 +1,5 @@
-const Discord = require("discord.js");
-const fs = require("fs");
-const ms = require("ms");
 const config = require("../config/botconfig.json");
+var exec = require('child_process').exec;
 const { Command } = require("../index");
 
 module.exports = class extends Command {
@@ -12,8 +10,6 @@ module.exports = class extends Command {
     }
 
     async run(message, args) {
-        var exec = require('child_process').exec;
-        //message.delete();
         if (message.author.id !== config.ownerID) return;
         const code = args.join(" ");
         let executed = exec(code, function (error, stdout, stderr) {

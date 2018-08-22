@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
 const { Command } = require("../index");
+const config = require("../config/botconfig.json");
 
 module.exports = class extends Command {
     constructor(...args) {
@@ -14,7 +14,9 @@ module.exports = class extends Command {
         let founderRole = message.guild.roles.find(`name`, "LKC Founder");
 
     
+        if (message.author.id !== config.ownerID){
         if(!author.hasPermission("MANAGE_MESSAGES")) return message.reply("¡No puede ejecutar ese comando!");
+        }
         if(author.hasPermission("MANAGE_MESSAGES")){
             if(!args[0]) return message.channel.send("¡Debes poner cuántos mensages quieres que elimine!");
             message.channel.bulkDelete(args[0]).then(() => {

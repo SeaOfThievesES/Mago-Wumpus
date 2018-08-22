@@ -7,7 +7,9 @@ const Command =  require('./Command');
 Client.commands = new Discord.Collection();
 
 reloadCmds();
+
 module.exports.reloadCmds = reloadCmds;
+
 function reloadCmds() {
     fs.readdir("./commands/", (err, files) =>{
         if(err) console.log(err);
@@ -21,9 +23,9 @@ function reloadCmds() {
         jsfile.forEach((f, i) =>
         {
             delete require.cache[require.resolve(`./commands/${f}`)];
-            let Props = require(`./commands/${f}`);
+            let Comando = require(`./commands/${f}`);
             console.log(`Comando ${f} cargado!`);
-            let command = new Props(Client, f, '+');
+            let command = new Comando(Client, f, '+');
             Client.commands.set(command.name, command);
         })
 
@@ -31,7 +33,7 @@ function reloadCmds() {
 }
 
 Client.on("message", async message => {    
-    if(message.author.Client) return;
+    if(message.author.bot) return;
 
     let prefixes = JSON.parse(fs.readFileSync("config/prefixes.json"));
 
@@ -42,12 +44,12 @@ Client.on("message", async message => {
     }   
     let prefix = prefixes[message.guild.id].prefixes; 
 
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
-    let commandfile = Client.commands.get(cmd.slice(prefix.length));
     if(message.content.startsWith(prefix)){
-    if(commandfile) commandfile.run(message,args);
+        let messageArray = message.content.split(" ");
+        let cmd = messageArray[0];
+        let args = messageArray.slice(1);
+        let commandfile = Client.commands.get(cmd.slice(prefix.length));
+        if(commandfile) await commandfile.run(message,args);
     }
    
 });
@@ -56,15 +58,12 @@ let statuses = ['ser mago', 'lanzar magia', 'hacer magia'];
 
 Client.on("ready", async =>{
     console.log(`¡${Client.user.username} está online!`);
-    //Client.user.setActivity(`MAGO WUMPUS`, {type: "PLAYING"});
     setInterval(function(){
     let status = statuses[Math.floor(Math.random()*(statuses.length - 1))];
     Client.user.setActivity(`${status}`, {type: "PLAYING"});
-   // console.log(status);
-    }, 5000)
-   // }, 600000)
-    
+    }, 60000)  
 });
+
 Client.on('guildMemberAdd', member => {
     let canalBienvenida = member.guild.channels.find(`name`, "entrada-salida");
     let sinhogarRol = member.guild.roles.find(`name`, "Sinhogar");
@@ -80,6 +79,7 @@ Client.on('guildMemberAdd', member => {
     canalBienvenida.send(bienvenidoEmbed);
     member.addRole(sinhogarRol.id);
 });
+
 Client.on('guildMemberRemove', member => {
     let canalDespedida = member.guild.channels.find(`name`, "entrada-salida");
     
@@ -91,7 +91,6 @@ Client.on('guildMemberRemove', member => {
     .setColor("#7289da");
     canalDespedida.send(canalDespedidaEmbed);
 });
-
 
 Client.login(token.token);
 

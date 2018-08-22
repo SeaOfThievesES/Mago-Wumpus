@@ -3,8 +3,12 @@ config/token.json
 config/botconfig.json
 config/prefixes.json
 
+<<<<<<< HEAD
 # Node
 node_modules/
 
 # Other
 start.bat
+=======
+node_modules/
+>>>>>>> 5c760cdf203992abc63a5943827f4568e303b8c4
