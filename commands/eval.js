@@ -20,9 +20,8 @@ module.exports = class extends Command {
 
             if (mensaje.length > 2000) {
                 if (fs.exists('./output') == true) {
-                    fs.unlink('./output', (err) => {
+                    fs.unlink('./output', function(err) {
                         if (err) throw err;
-                        console.log('path/file.txt was deleted');
                     });
                 }
                 fs.writeFile("./output", mensaje, function(err) {
