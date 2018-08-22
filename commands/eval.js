@@ -13,10 +13,10 @@ module.exports = class extends Command {
             let evaled = eval(code);
 
             evaled.then(function(result) {
-                if (typeof result !== "string")
-                    require("util").inspect(result);
+                if (typeof evaled !== "string")
+                    require("util").inspect(evaled);
 
-                message.channel.send(clean(result), {code:"x1"});
+                message.channel.send(clean(evaled), {code:"x1"});
             })
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);

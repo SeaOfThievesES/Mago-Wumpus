@@ -11,7 +11,7 @@ module.exports = class extends Event {
         const bot = this.bot;
         setInterval(function(){
             const status = statuses[Math.floor(Math.random()*(statuses.length - 1))];
-            this.bot.user.setActivity(`${status}`, {type: "PLAYING"});
+            bot.user.setActivity(`${status}`, {type: "PLAYING"});
         }, 60000);
     }
 }
