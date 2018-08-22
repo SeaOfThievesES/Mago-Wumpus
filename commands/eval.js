@@ -13,7 +13,8 @@ module.exports = class extends Command {
             let evaled = eval(code);
 
             if (typeof evaled !== "string")
-                await require("util").inspect(evaled).then(function(result) {
+                let promise = await require("util").inspect(evaled);
+                promise.then(function(result) {
                     message.channel.send(clean(evaled), {code:"x1"});
                 });
         } catch (err) {
