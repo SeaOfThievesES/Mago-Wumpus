@@ -19,9 +19,11 @@ module.exports = class extends Command {
             const mensaje = clean(evaled);
 
             if (mensaje.length > 2000) {
-                if (fs.exists('./output') == true) {
+                try {
+                    fs.accessSync('./output', fs.constants.R_OK | fs.constants.W_OK);
                     fs.unlinkSync('./output');
-                }
+                } catch (err) { }
+
                 fs.writeFileSync("./output", mensaje);
 
                 message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
