@@ -78,7 +78,7 @@ Client.on("message", async message => {
     }
    
 });
-
+*/
 let statuses = ['ser mago', 'lanzar magia', 'hacer magia'];
 
 Client.on("ready", async =>{
@@ -88,7 +88,7 @@ Client.on("ready", async =>{
     Client.user.setActivity(`${status}`, {type: "PLAYING"});
     }, 60000)  
 });
-
+/*
 Client.on('guildMemberAdd', member => {
     let canalBienvenida = member.guild.channels.find(`name`, "entrada-salida");
     let sinhogarRol = member.guild.roles.find(`name`, "Sinhogar");
