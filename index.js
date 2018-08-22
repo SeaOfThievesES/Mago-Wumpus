@@ -49,7 +49,7 @@ async function reloadEvents() {
             let Evento = require(`./events/${f}`);
             console.log(`Evento ${f} cargado!`);
             let event = new Evento(Client, f, '+');
-            Client.on(event.name, await event.run.bind(event));
+            Client.on(event.name, event.run.bind(event));
             delete require.cache[require.resolve(`./events/${f}`)];
         })
     });
