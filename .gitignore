@@ -4,3 +4,5 @@ start.bat
 
 config/botconfig.json
 config/prefixes.json
+
+node_modules/
