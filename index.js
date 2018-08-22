@@ -51,7 +51,7 @@ function reloadEvents() {
             console.log(`Evento ${f} cargado!`);
             let event = new Evento(Client, f, '+');
             Client.on(event.name, function(eventObject) {
-                event.run().bind(null);
+                event.run.bind(null);
             });
         })
     });
