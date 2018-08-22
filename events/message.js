@@ -4,9 +4,7 @@ const fs = require("fs");
 
 module.exports = class extends Event {
     constructor(...args) {
-        super(...args, {
-            name: 'message'
-        });
+        super(...args, { });
     }
 
     async run(message) {
