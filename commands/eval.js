@@ -12,12 +12,19 @@ module.exports = class extends Command {
             const code = args.join(" ");
             let evaled = eval(code);
 
-            evaled.then(function(result) {
+            if(evaled.then) {
+                evaled.then(function(result) {
+                    if (typeof evaled !== "string")
+                        require("util").inspect(evaled);
+
+                    message.channel.send(clean(evaled), {code:"x1"});
+                })
+            } else {
                 if (typeof evaled !== "string")
                     require("util").inspect(evaled);
 
                 message.channel.send(clean(evaled), {code:"x1"});
-            })
+            }
         } catch (err) {
             message.channel.send(`\ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
         }
