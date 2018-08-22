@@ -12,8 +12,9 @@ module.exports = class extends Command {
         if (message.member.hasPermission("ADMINISTRATOR")) return message.reply("¡No puedes hacer eso!");
         }
         message.channel.send('Reiniciando comandos...')
-        magoWumpus.reloadCmds()
-            .then(msg => Client.destroy())
-            .then(() => Client.login(token.token));
+        magoWumpus.reloadCmds();
+        magoWumpus.reloadEvents()
+            .then(msg => this.bot.destroy())
+            .then(() => this.bot.login(token.token));
     }
 }
