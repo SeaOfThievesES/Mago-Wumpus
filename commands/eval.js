@@ -15,13 +15,13 @@ module.exports = class extends Command {
             if(evaled.then) {
                 evaled.then(function(result) {
                     if (typeof evaled !== "string")
-                        require("util").inspect(evaled);
+                        evaled = require("util").inspect(evaled);
 
                     message.channel.send(clean(evaled), {code:"x1"});
                 })
             } else {
                 if (typeof evaled !== "string")
-                    require("util").inspect(evaled);
+                    evaled = require("util").inspect(evaled);
 
                 message.channel.send(clean(evaled), {code:"x1"});
             }
