@@ -19,19 +19,21 @@ module.exports = class extends Command {
             const mensaje = clean(evaled);
 
             if (mensaje.length > 2000) {
-                fs.writeFile("../output", mensaje, function(err) {
+                if (fs.exists('./output') == true) {
+                    fs.unlink('./output', (err) => {
+                        if (err) throw err;
+                        console.log('path/file.txt was deleted');
+                    });
+                }
+                fs.writeFile("./output", mensaje, function(err) {
                     if(err) {
                         return console.log(err);
                     }
-                });
 
-                message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
-                    attachment: 'output',
-                    name: 'output'
-                }]});
-
-                fs.unlink('../output', (err) => {
-                    if (err) throw err;
+                    message.channel.send("El mensaje contiene mas de 2000 caracteres", {files: [{
+                        attachement: './output',
+                        name: 'output'
+                    }]});
                 });
             } else {
                 message.channel.send(mensaje, {code:"x1"});
