@@ -10,8 +10,8 @@ module.exports = class extends Event {
         const canalDespedida = member.guild.channels.find(`name`, "entrada-salida");
     
         let canalDespedidaEmbed = new RichEmbed()
-        .setTitle("¡Hasta otra!")
-        .setDescription(`¡${member.displayName} ha salido de la **${member.guild.name}**!\n\nAl traspasar la barrera mágica sus roles han desaparecido.`)
+        .setTitle("**¡Hasta otra!**")
+        .setDescription(`¡${member.displayName} ha salido de la **${member.guild.name}**.\n\nAl traspasar la barrera mágica sus roles han desaparecido.`)
         .setImage("https://cdn.discordapp.com/attachments/480396475981889536/481209963998347277/2018-08-20_22-59-24.gif")
         .setTimestamp()
         .setColor("#7289da");
